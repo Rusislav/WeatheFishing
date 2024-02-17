@@ -9,5 +9,6 @@ namespace WeatheFishing.Contracts
     internal interface IWeatherService
     {
         List<string> GetCurrentWeatherData(string urlCurrentWeather);
+        List<string> GetWeatherDataFor3Days(string urlWeatherFor3Days);
     }
 }

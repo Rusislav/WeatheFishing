@@ -23,39 +23,49 @@ namespace WeatheFishing
             var urlForecastForBulgaria = "http://www.weather.bg/index.php?koiFail=bg&lng=0";
 
 
-            var chromeDriverPath = @"C:\Users\rusiv\Desktop\Project\WeatheFishing\chromedriver.exe";
-            IWebDriver driver = new ChromeDriver(chromeDriverPath);
+            //var chromeDriverPath = @"C:\Users\rusiv\Desktop\Project\WeatheFishing\chromedriver.exe";
+            //IWebDriver driver = new ChromeDriver(chromeDriverPath);
 
-            // Navigate to the webpage
-            driver.Navigate().GoToUrl(urlCurrentWeather);
-            driver.Manage().Window.Maximize();
+            //// Navigate to the webpage
+            //driver.Navigate().GoToUrl(urlCurrentWeather);
+            //driver.Manage().Window.Maximize();
 
-            // Find the element by its XPath (you can use other locators like ID, class name, etc.)
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            //// Find the element by its XPath (i can use other locators like ID, class name, etc.)
+            //WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
 
-            IWebElement element = wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.ClassName("linkOpenClose")))[0];
+            //IWebElement element = wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.ClassName("linkOpenClose")))[0];
 
-            // Scroll into view using WebDriver's built-in method
-            Actions actions = new Actions(driver);
-            actions.MoveToElement(element);
-            actions.Perform();
+            //// Scroll into view using WebDriver's built-in method
+            //Actions actions = new Actions(driver);
+            //actions.MoveToElement(element);
+            //actions.Perform();
 
-            // Click the element using JavaScript
-            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].click();", element);
+            //// Click the element using JavaScript
+            //((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].click();", element);
  
 
             // escape the ""        
-            for (int i = 0; i < CityConstants.Cities.Length; i++)
+            for (int i = 0; i < CityConstants.CitiesForCurrentWeather.Length; i++)
             {
-                CityConstants.Cities[i] = CityConstants.Cities[i].Replace("'", "''");
+                CityConstants.CitiesForCurrentWeather[i] = CityConstants.CitiesForCurrentWeather[i].Replace("'", "''");
             }
           
             IWeatherService weatherService = new WeatherService();
-            List<string> currentWeatherData = weatherService.GetCurrentWeatherData(urlCurrentWeather);
+            List<string> currentWeatherData = weatherService.GetCurrentWeatherData(urlCurrentWeather);    
+            
+           
+
+            //driver.Navigate().GoToUrl(urlWeatherIn3Days);
+            List<string> getWeatherDataFor3Days = weatherService.GetWeatherDataFor3Days(urlWeatherIn3Days);
 
             if (currentWeatherData != null)
             {
                 Console.WriteLine(string.Join(Environment.NewLine, currentWeatherData));
+                Console.WriteLine(Environment.NewLine);
+            }
+            if (getWeatherDataFor3Days != null)
+            {
+                Console.WriteLine(string.Join(Environment.NewLine, getWeatherDataFor3Days));
             }
 
 

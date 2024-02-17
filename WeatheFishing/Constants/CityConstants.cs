@@ -9,7 +9,7 @@ namespace WeatheFishing.Constants
     internal class CityConstants
     {
 
-        public static readonly string[] Cities = {
+        public static readonly string[] CitiesForCurrentWeather = {
         "Монтана",
         "Плевен",
         "Пловдив - Тракия",
@@ -17,7 +17,13 @@ namespace WeatheFishing.Constants
         "Кърджали"
         };
 
-
+        public static readonly string[] CitiesForFor3DaysWeather =
+        {
+         "Монтана",
+        "Плевен",
+        "Пловдив",      
+        "Кърджали"
+        };
     }
 }
 

@@ -22,3 +22,4 @@ C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\obj\Deb
 C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\obj\Debug\net8.0\ref\WeatheFishing.dll
 C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\bin\Debug\net8.0\SeleniumExtras.WaitHelpers.dll
 C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\bin\Debug\net8.0\HtmlAgilityPack.dll
+C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\obj\Debug\net8.0\WeatheFishing.sourcelink.json
