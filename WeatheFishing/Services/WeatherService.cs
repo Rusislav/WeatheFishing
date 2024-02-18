@@ -10,45 +10,53 @@ namespace WeatheFishing.Services
 {
     internal class WeatherService : IWeatherService
     {
-        public List<string> GetCurrentWeatherData(string urlCurrentWeather)
+        public async Task<List<string>> GetCurrentWeatherDataAsync(string urlCurrentWeather)
         {
             var CurrentWeatherData = new List<string>();
+            try
+            {         
 
-            using (var httpClient = new HttpClient())
-            {
-                var html = httpClient.GetStringAsync(urlCurrentWeather).Result;
-                var htmlDocument = new HtmlDocument();
-                htmlDocument.LoadHtml(html);
-
-
-                if (CityConstants.CitiesForCurrentWeather != null)
+                using (var httpClient = new HttpClient())
                 {
-                    foreach (var city in CityConstants.CitiesForCurrentWeather)
+                    var html = await httpClient.GetStringAsync(urlCurrentWeather);
+                    var htmlDocument = new HtmlDocument();
+                    htmlDocument.LoadHtml(html);
+
+                    if (CityConstants.CitiesForCurrentWeather != null)
                     {
-                        var currentWeatherInCity = htmlDocument.DocumentNode.SelectSingleNode($"//td[text()='{city}']");
-                        var dataOfTheWeather = currentWeatherInCity?.SelectNodes("following-sibling::td[position() <= 7]");
-
-                        if (dataOfTheWeather != null)
+                        foreach (var city in CityConstants.CitiesForCurrentWeather)
                         {
-                            string date = dataOfTheWeather[0]?.InnerText.Trim();
-                            string time = dataOfTheWeather[1]?.InnerText.Trim();
-                            string temperature = dataOfTheWeather[2]?.InnerText.Trim();
-                            string weatherCondition = dataOfTheWeather[3]?.InnerText.Trim();
-                            string windSpeed = dataOfTheWeather[4]?.InnerText.Trim();
-                            string windDirection = dataOfTheWeather[5]?.InnerText.Trim();
-                            string pressure = dataOfTheWeather[6]?.InnerText.Trim();
+                            var currentWeatherInCity = htmlDocument.DocumentNode.SelectSingleNode($"//td[text()='{city}']");
+                            var dataOfTheWeather = currentWeatherInCity?.SelectNodes("following-sibling::td[position() <= 7]");
 
-                            string formattedData = $"{city} - Date: {date}, Time: {time} часа, Temperature: {temperature} °C, Weather: {weatherCondition}, Wind Speed: {windSpeed} m/s, Wind Direction: {windDirection}, Pressure: {pressure} hPa";
-                            CurrentWeatherData.Add(formattedData);
+                            if (dataOfTheWeather != null)
+                            {
+                                string date = dataOfTheWeather[0]?.InnerText.Trim();
+                                string time = dataOfTheWeather[1]?.InnerText.Trim();
+                                string temperature = dataOfTheWeather[2]?.InnerText.Trim();
+                                string weatherCondition = dataOfTheWeather[3]?.InnerText.Trim();
+                                string windSpeed = dataOfTheWeather[4]?.InnerText.Trim();
+                                string windDirection = dataOfTheWeather[5]?.InnerText.Trim();
+                                string pressure = dataOfTheWeather[6]?.InnerText.Trim();
+
+                                string formattedData = $"{city} - Date: {date}, Time: {time} часа, Temperature: {temperature} °C, Weather: {weatherCondition}, Wind Speed: {windSpeed} m/s, Wind Direction: {windDirection}, Pressure: {pressure} hPa";
+                                CurrentWeatherData.Add(formattedData);
+                            }
                         }
                     }
                 }
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
             }
 
             return CurrentWeatherData;
         }
 
-        public List<string> GetWeatherDataFor3Days(string urlWeatherFor3Days)
+
+        public async Task<List<string>> GetWeatherDataFor3DaysAsync(string urlWeatherFor3Days)
         {
             var WeatherDataFor3Days = new List<string>();
 
@@ -63,7 +71,7 @@ namespace WeatheFishing.Services
                     //htmlDocument.LoadHtml(html);
 
                     var web = new HtmlWeb();
-                    var doc = web.Load(urlWeatherFor3Days);
+                   var doc = await web.LoadFromWebAsync(urlWeatherFor3Days).ConfigureAwait(false);
 
                     if (CityConstants.CitiesForFor3DaysWeather != null)
                     {
@@ -96,9 +104,9 @@ namespace WeatheFishing.Services
                                 var todayTemp = dataOfTheWeather[0].SelectNodes(".//span");
                                 if (todayTemp != null && todayTemp.Count == 2)
                                 {
-                                    var lowTemperature = todayTemp[0].InnerText.Trim();
-                                    var highTemperature = todayTemp[1].InnerText.Trim();
-                                    weatherDataBuilder.AppendLine($"Today Temperature: {lowTemperature}/{highTemperature}");
+                                    var lowTemperature = todayTemp[0].InnerHtml.Replace("&nbsp;", "").Trim();
+                                    var highTemperature = todayTemp[1].InnerHtml.Replace("&nbsp;", "").Trim();
+                                    weatherDataBuilder.AppendLine($"Today Temperature: Low {lowTemperature}High {highTemperature}°C");
                                 }
 
                                 string TodayweatherCondition = dataOfTheWeather[1]?.InnerText.Trim();
@@ -107,9 +115,9 @@ namespace WeatheFishing.Services
                                 var nextDayTemp = dataOfTheWeather[2].SelectNodes(".//span");
                                 if (nextDayTemp != null && nextDayTemp.Count == 2)
                                 {
-                                    var lowTemperature = nextDayTemp[0].InnerText.Trim();
-                                    var highTemperature = nextDayTemp[1].InnerText.Trim();
-                                    weatherDataBuilder.AppendLine($"Next Day Temperature: {lowTemperature}/{highTemperature}");
+                                    var lowTemperature = nextDayTemp[0].InnerHtml.Replace("&nbsp;", "").Trim();
+                                    var highTemperature = nextDayTemp[1].InnerHtml.Replace("&nbsp;", "").Trim();
+                                    weatherDataBuilder.AppendLine($"Next Day Temperature: Low {lowTemperature}High {highTemperature}°C");
                                 }
 
                                 string nextDayweatherCondition = dataOfTheWeather[3]?.InnerText.Trim();
@@ -118,9 +126,9 @@ namespace WeatheFishing.Services
                                 var inTwoDayTemp = dataOfTheWeather[4].SelectNodes(".//span");
                                 if (inTwoDayTemp != null && inTwoDayTemp.Count == 2)
                                 {
-                                    var lowTemperature = inTwoDayTemp[0].InnerText.Trim();
-                                    var highTemperature = inTwoDayTemp[1].InnerText.Trim();
-                                    weatherDataBuilder.AppendLine($"In Two Days Temperature: {lowTemperature}/{highTemperature}");
+                                    var lowTemperature = inTwoDayTemp[0].InnerHtml.Replace("&nbsp;", "").Trim();
+                                    var highTemperature = inTwoDayTemp[1].InnerHtml.Replace("&nbsp;", "").Trim();
+                                    weatherDataBuilder.AppendLine($"In Two Days Temperature: Low {lowTemperature}High {highTemperature}°C");
                                 }
 
                                 string inTwoDayweatherCondition = dataOfTheWeather[5]?.InnerText.Trim();
@@ -129,16 +137,16 @@ namespace WeatheFishing.Services
                                 var inThreeDayTemp = dataOfTheWeather[6].SelectNodes(".//span");
                                 if (inThreeDayTemp != null && inThreeDayTemp.Count == 2)
                                 {
-                                    var lowTemperature = inThreeDayTemp[0].InnerText.Trim();
-                                    var highTemperature = inThreeDayTemp[1].InnerText.Trim();
-                                    weatherDataBuilder.AppendLine($"In Three Days Temperature: {lowTemperature}/{highTemperature}");
+                                    var lowTemperature = inThreeDayTemp[0].InnerHtml.Replace("&nbsp;", "").Trim();
+                                    var highTemperature = inThreeDayTemp[1].InnerHtml.Replace("&nbsp;", "").Trim();
+                                    weatherDataBuilder.AppendLine($"In Three Days Temperature: Low {lowTemperature}High {highTemperature}°C");
                                 }
 
                                 string inThreeDayweatherCondition = dataOfTheWeather[7]?.InnerText.Trim();
-                                weatherDataBuilder.AppendLine($"In Three Days Weather Condition: {inThreeDayweatherCondition}");
+                                weatherDataBuilder.AppendLine($"In Three Days Weather Condition:  {inThreeDayweatherCondition}");
                             }
 
-                            Console.WriteLine(weatherDataBuilder.ToString());
+                            //Console.WriteLine(weatherDataBuilder.ToString());
                             WeatherDataFor3Days.Add(weatherDataBuilder.ToString());
                         }
                     }

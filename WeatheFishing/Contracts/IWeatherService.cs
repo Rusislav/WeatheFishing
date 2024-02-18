@@ -8,7 +8,7 @@ namespace WeatheFishing.Contracts
 {
     internal interface IWeatherService
     {
-        List<string> GetCurrentWeatherData(string urlCurrentWeather);
-        List<string> GetWeatherDataFor3Days(string urlWeatherFor3Days);
+        Task<List<string>> GetCurrentWeatherDataAsync(string urlCurrentWeather);
+       Task<List<string>> GetWeatherDataFor3DaysAsync(string urlWeatherFor3Days);
     }
 }

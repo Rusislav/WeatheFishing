@@ -14,7 +14,7 @@ namespace WeatheFishing
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
             var urlCurrentWeather = "http://www.weather.bg/index.php?koiFail=tekushti&lng=0";
@@ -51,20 +51,24 @@ namespace WeatheFishing
             }
           
             IWeatherService weatherService = new WeatherService();
-            List<string> currentWeatherData = weatherService.GetCurrentWeatherData(urlCurrentWeather);    
-            
-           
 
-            //driver.Navigate().GoToUrl(urlWeatherIn3Days);
-            List<string> getWeatherDataFor3Days = weatherService.GetWeatherDataFor3Days(urlWeatherIn3Days);
+            Task<List<string>> currentWeatherDataTask =  weatherService.GetCurrentWeatherDataAsync(urlCurrentWeather);
+            List<string> currentWeatherData = await currentWeatherDataTask;
+
+           
+            Task<List<string>> getWeatherDataFor3DaysAsync = weatherService.GetWeatherDataFor3DaysAsync(urlWeatherIn3Days);
+            List<string> getWeatherDataFor3Days = await getWeatherDataFor3DaysAsync;
 
             if (currentWeatherData != null)
             {
+                Console.WriteLine("Current Weather. \n");
                 Console.WriteLine(string.Join(Environment.NewLine, currentWeatherData));
                 Console.WriteLine(Environment.NewLine);
             }
             if (getWeatherDataFor3Days != null)
             {
+                Console.WriteLine("Weather in the next 3 days. \n");
+              
                 Console.WriteLine(string.Join(Environment.NewLine, getWeatherDataFor3Days));
             }
 
