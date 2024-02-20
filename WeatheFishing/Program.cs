@@ -22,26 +22,6 @@ namespace WeatheFishing
             var urlRiverWaterLevel = "http://www.meteo.bg/bg/rekiTablitsa";
             var urlForecastForBulgaria = "http://www.weather.bg/index.php?koiFail=bg&lng=0";
 
-
-            //var chromeDriverPath = @"C:\Users\rusiv\Desktop\Project\WeatheFishing\chromedriver.exe";
-            //IWebDriver driver = new ChromeDriver(chromeDriverPath);
-
-            //// Navigate to the webpage
-            //driver.Navigate().GoToUrl(urlCurrentWeather);
-            //driver.Manage().Window.Maximize();
-
-            //// Find the element by its XPath (i can use other locators like ID, class name, etc.)
-            //WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-
-            //IWebElement element = wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.ClassName("linkOpenClose")))[0];
-
-            //// Scroll into view using WebDriver's built-in method
-            //Actions actions = new Actions(driver);
-            //actions.MoveToElement(element);
-            //actions.Perform();
-
-            //// Click the element using JavaScript
-            //((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].click();", element);
  
 
             // escape the ""        
@@ -59,19 +39,31 @@ namespace WeatheFishing
             Task<List<string>> getWeatherDataFor3DaysAsync = weatherService.GetWeatherDataFor3DaysAsync(urlWeatherIn3Days);
             List<string> getWeatherDataFor3Days = await getWeatherDataFor3DaysAsync;
 
+
+            Task<List<string>> getRiverWatherLevelAsync = weatherService.GetRiverWatherLevelAsync(urlRiverWaterLevel);
+            List<string> getRiverWatherLevel = await getRiverWatherLevelAsync;
+
             if (currentWeatherData != null)
             {
                 Console.WriteLine("Current Weather. \n");
                 Console.WriteLine(string.Join(Environment.NewLine, currentWeatherData));
                 Console.WriteLine(Environment.NewLine);
             }
-            if (getWeatherDataFor3Days != null)
+            if (getRiverWatherLevel != null)
             {
-                Console.WriteLine("Weather in the next 3 days. \n");
-              
-                Console.WriteLine(string.Join(Environment.NewLine, getWeatherDataFor3Days));
+                Console.WriteLine("The water level in rivers \n");
+                Console.WriteLine(string.Join(Environment.NewLine, getRiverWatherLevel));
             }
 
+            //if (getWeatherDataFor3Days != null)
+            //{
+            //    Console.WriteLine("Weather in the next 3 days. \n");
+              
+            //    Console.WriteLine(string.Join(Environment.NewLine, getWeatherDataFor3Days));
+            //}
+
+           
+            
 
             // ще ми трябва данни за район за плевен там се намира река панега , монтана там се намира река огоста 
             //пловдив там се намира река марица , Марица 	Пазарджик ,ктрджали там се намира язовир кърджали 
