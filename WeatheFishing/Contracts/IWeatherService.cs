@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,7 @@ namespace WeatheFishing.Contracts
 
         List<RiverData> BestRiverToFish(string river,string hydrometricStation, double minimumFloatRaterOfTheRiver,
             double nominalFloatRaterOfTheRiver, double maximumFloatRaterOfTheRiver ,int depthOfTheWater, double currentflowRate, int changeInHeightOfTheRiver);
+
+       
     }
 }

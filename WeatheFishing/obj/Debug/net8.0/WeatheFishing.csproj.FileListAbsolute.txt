@@ -23,3 +23,15 @@ C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\obj\Deb
 C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\bin\Debug\net8.0\SeleniumExtras.WaitHelpers.dll
 C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\bin\Debug\net8.0\HtmlAgilityPack.dll
 C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\obj\Debug\net8.0\WeatheFishing.sourcelink.json
+C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\bin\Debug\net8.0\Microsoft.Extensions.Logging.Configuration.dll
+C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\bin\Debug\net8.0\Microsoft.Extensions.Logging.Console.dll
+C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\bin\Debug\net8.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+C:\Users\rusiv\Desktop\Project\WeatheFishing\WeatheFishing\WeatheFishing\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll

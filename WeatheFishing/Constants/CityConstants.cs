@@ -9,6 +9,8 @@ namespace WeatheFishing.Constants
     internal class CityConstants
     {
 
+        public static readonly string StartPointForDatesInWeather = "Град";
+
         public static readonly string[] CitiesForCurrentWeather = {
         "Монтана",
         "Плевен",
@@ -39,8 +41,7 @@ namespace WeatheFishing.Constants
             "18650",
             "18700",
             "18800",
-            "74650",
-            "74650",
+            "74650",           
             "61650",
             "61700",
             "52800",
@@ -50,6 +51,7 @@ namespace WeatheFishing.Constants
             "51800 ",
             "51880 ",           
         };
+      
     }
 }
 
