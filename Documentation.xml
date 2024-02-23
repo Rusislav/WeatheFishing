@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WeatherFishing</name>
+    </assembly>
+    <members>
+        <member name="M:WeatheFishing.Services.WeatherService.#ctor(HtmlAgilityPack.HtmlWeb,Microsoft.Extensions.Logging.ILogger{WeatheFishing.Services.WeatherService})">
+            <summary>
+            Injecting the constructor.
+            </summary>
+            <param name="htmlWeb"></param>
+            <param name="logger"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="F:WeatheFishing.Services.WeatherService.bestRiversForFishing">
+            <summary>
+            List where I hold the proper rivers for fishing.
+            </summary>
+        </member>
+        <member name="M:WeatheFishing.Services.WeatherService.GetCurrentWeatherDataAsync(System.String)">
+            <summary>
+            Get the data for the present weather from the web server using HtmlAgilityPack and save the data in a List.
+            </summary>
+            <param name="urlCurrentWeather"></param>
+            <returns>List with the taken data.</returns>
+        </member>
+        <member name="M:WeatheFishing.Services.WeatherService.GetWeatherDataFor3DaysAsync(System.String)">
+            <summary>
+            Get the weather data for the next three days from the web server using HtmlAgilityPack and save the data in a List.
+            </summary>
+            <param name="urlWeatherFor3Days"></param>
+            <returns>List with the taken data</returns>
+        </member>
+        <member name="M:WeatheFishing.Services.WeatherService.GetRiverWatherLevelAsync(System.String)">
+            <summary>
+            Get the river level water data from the web server using HtmlAgilityPack and save the data in a List then use
+            the methods BestRiverToFish and IsRiverSuitableForFishing to add the rivers to the List and judge whether a given river is fishable.
+            </summary>
+            <param name="urlRiverWaterLevel"></param>
+            <returns>List with the taken data and conclusion whether a given river is suitable for fishing. </returns>
+        </member>
+        <member name="M:WeatheFishing.Services.WeatherService.BestRiverToFish(System.String,System.String,System.Double,System.Double,System.Double,System.Int32,System.Double,System.Int32)">
+            <summary>
+            Adds the rivers that have been checked by the IsRiverSuitableForFishing method to the List.
+            </summary>
+            <param name="river"></param>
+            <param name="hydrometricStation"></param>
+            <param name="minimumFloatRate"></param>
+            <param name="nominalFloatRate"></param>
+            <param name="maximumFloatRate"></param>
+            <param name="depthOfTheWater"></param>
+            <param name="currentFlowRate"></param>
+            <param name="changeInHeightOfTheRiver"></param>
+            <returns>List with the rivers.</returns>
+        </member>
+        <member name="M:WeatheFishing.Services.WeatherService.IsRiverSuitableForFishing(System.Double,System.Double,System.Int32)">
+            <summary>
+            Checks whether a given river is suitable for fishing.
+            </summary>
+            <param name="nominalFloatRate"></param>
+            <param name="currentFlowRate"></param>
+            <param name="changeInHeightOfTheRiver"></param>
+            <returns>True or false</returns>
+        </member>
+        <member name="M:WeatheFishing.Services.WeatherService.LoadHtmlDocumentAsync(System.String)">
+            <summary>
+            Asynchronously load HTML content from a specified URL.
+            </summary>
+            <param name="url"></param>
+            <returns>HTML content</returns>
+        </member>
+        <member name="M:WeatheFishing.Services.WeatherService.AppendTemperatureInfo(System.Text.StringBuilder,HtmlAgilityPack.HtmlNodeCollection)">
+            <summary>
+            Gets the temperature data for the given day.
+            </summary>
+            <param name="builder"></param>
+            <param name="data"></param>
+        </member>
+        <member name="M:WeatheFishing.Services.WeatherService.GetDayLabel(System.Int32)">
+            <summary>
+            Returns a day that specifies a loop iteration.
+            </summary>
+            <param name="index"></param>
+            <returns>Returns a specific day</returns>
+        </member>
+    </members>
+</doc>
