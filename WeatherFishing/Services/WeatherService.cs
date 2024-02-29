@@ -222,7 +222,7 @@ namespace WeatheFishing.Services
                             $"Nominal flow rate of the river is {nominalFloatRaterOfTheRiver} [m³/s] \n" +
                             $"Maximum flow rate of the river is {maximumFloatRaterOfTheRiver} [m³/s] \n" +
                             $"The depth of the water is {depthOfTheWater} [cm] \n" +
-                            $"The current flow rate of the river {flowRate} [m3/s] \n" +
+                            $"The current flow rate of the river {flowRate}[m³/s] \n" +
                             $"The change in height of the river is {changeInHeightOfTheRiver} [cm]");
 
                         }
@@ -296,7 +296,7 @@ namespace WeatheFishing.Services
         {
             try
             {
-                if (IsRiverSuitableForFishing(nominalFloatRate, currentFlowRate, changeInHeightOfTheRiver))
+                if (IsRiverSuitableForFishing(nominalFloatRate, currentFlowRate, changeInHeightOfTheRiver, depthOfTheWater))
                 {
                     RiverData bestRiver = new RiverData()
                     {
@@ -323,22 +323,22 @@ namespace WeatheFishing.Services
 
 
         /// <summary>
-        /// Checks whether a given river is suitable for fishing.
+        /// Checks whether a given river is suitable for fishing, considering changes in the water level.
         /// </summary>
         /// <param name="nominalFloatRate"></param>
         /// <param name="currentFlowRate"></param>
         /// <param name="changeInHeightOfTheRiver"></param>
         /// <returns>True or false</returns>
-        private bool IsRiverSuitableForFishing(double nominalFloatRate, double currentFlowRate, int changeInHeightOfTheRiver)
+        private bool IsRiverSuitableForFishing(double nominalFloatRate, double currentFlowRate, int changeInHeightOfTheRiver,int depthOfTheWater)
         {
-            if (changeInHeightOfTheRiver > 0 && changeInHeightOfTheRiver <= 3)
+            var maxDeviationOfDepthOfTheWater = CityConstants.MaxRiverWaterDeviationPercent * depthOfTheWater;
+            var currentWaterFlowDeviation = Math.Abs(currentFlowRate - nominalFloatRate);
+
+            if (Math.Abs(changeInHeightOfTheRiver) < maxDeviationOfDepthOfTheWater && currentWaterFlowDeviation < CityConstants.MaxFlowRateDeviation)
             {
-                return (nominalFloatRate > currentFlowRate) && (nominalFloatRate - currentFlowRate < 3000);
+                return true;
             }
-            else if (changeInHeightOfTheRiver < 0 && changeInHeightOfTheRiver >= -3)
-            {
-                return (nominalFloatRate > currentFlowRate) && (nominalFloatRate - currentFlowRate < 3000);
-            }
+           
 
             return false;
         }

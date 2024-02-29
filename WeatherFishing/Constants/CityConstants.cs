@@ -54,7 +54,11 @@ namespace WeatheFishing.Constants
             "51800 ",
             "51880 ",           
         };
-      
+
+        public static readonly double MaxRiverWaterDeviationPercent = 0.15;
+
+        public static readonly double MaxFlowRateDeviation = 3000;
+
     }
 }
 

@@ -59,7 +59,8 @@ namespace WeatheFishing
 
                 if (data != null)
                 {
-                    Console.WriteLine($"{title} \n");
+                    Console.WriteLine($"{title}");
+                    Console.WriteLine(Environment.NewLine);
                     Console.WriteLine(string.Join(Environment.NewLine, data));
                     Console.WriteLine(Environment.NewLine);
                 }
